@@ -23,6 +23,9 @@ from keras.optimizers import Adam, RMSprop
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
+from sklearn.model_selection import cross_val_score
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
 
 """
     Funzione **calcola_media_colonne** per calcolare la media delle colonne in un file Excel.
@@ -234,28 +237,56 @@ def carica_dati_per_rete_bayesiana(file_csv):
     y = le.fit_transform(y)
 
     return X, y, emotions
-
 def bayesian_model_sklearn(file_csv):
+    # Carica i dati
     X, y, emotions = carica_dati_per_rete_bayesiana(file_csv)
 
-    # Dividi i dati in train e test
+    # Split dei dati in train e test
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+    from imblearn.over_sampling import SMOTE
+    # Applicare SMOTE per gestire il bilanciamento delle classi (se necessario)
+    smote = SMOTE(random_state=42, k_neighbors=3)
+    X_resampled, y_resampled = smote.fit_resample(X_train, y_train)
 
-    # Crea e addestra il modello di Naive Bayes
+    # Crea e addestra il modello Naive Bayes
     model = GaussianNB()
-    model.fit(X_train, y_train)
-
-    # Effettua le previsioni
+    model.fit(X_resampled, y_resampled)
+    
+    # Previsioni sui dati di test
     y_pred = model.predict(X_test)
 
     # Converti le etichette in nomi di emozioni
     y_pred_classes = [emotions[label] for label in y_pred]
     y_test_classes = [emotions[label] for label in y_test]
 
-    # Stampa i risultati
+    # Calcola l'accuratezza
+    accuracy = accuracy_score(y_test_classes, y_pred_classes)
+    print(f"Accuratezza: {accuracy:.2f}")
+
+    # Stampa il classification report
+    print("Classification Report:")
     print(classification_report(y_test_classes, y_pred_classes, zero_division=0))
+
+    # Stampa la confusion matrix
+    print("Confusion Matrix:")
     print(confusion_matrix(y_test_classes, y_pred_classes))
 
+    # Esegui cross-validation per testare la stabilità del modello
+    cv_scores = cross_val_score(model, X_resampled, y_resampled, cv=5)
+    print(f"Cross-validation scores: {cv_scores}")
+    print(f"Media della cross-validation: {np.mean(cv_scores):.2f}")
+    
+    # Verifica la presenza di overfitting confrontando accuracy_train vs accuracy_test
+    y_train_pred = model.predict(X_resampled)
+    y_train_pred_classes = [emotions[label] for label in y_train_pred]
+    accuracy_train = accuracy_score(y_resampled, y_train_pred_classes)
+    print(f"Accuratezza sui dati di addestramento: {accuracy_train:.2f}")
+
+    # Controllo dell'overfitting: confrontiamo accuracy_train e accuracy_test
+    if accuracy_train > accuracy:
+        print("Attenzione: Potenziale overfitting rilevato!")
+    else:
+        print("Il modello sembra non soffrire di overfitting.")
 
 
 """
@@ -325,7 +356,6 @@ def main():
             "      \033[91mpython\033[0m test_validation_model.py \033[91m--video-folder\033[0m /percorso/della/tua/cartellaDeiVideo\n")
         print("Oppure importa una cartella 'videos' con all'interno i video di tuo interesse nella workspace corrente.")
         exit()
-    print("RIsultato:\n", risultato)
     file_csv = './dativideo.csv'
     with open(file_csv, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
@@ -339,8 +369,6 @@ def main():
 
             # Scrivi la riga corretta
             writer.writerow([f"{nome_video}{etichetta}", percentuale])
-            print("Nome video:", f"{nome_video}{etichetta}")
-            print("Percentuale:", percentuale)
             print()
 
     print("Dati salvati correttamente nel file CSV:", file_csv)
