@@ -1,4 +1,4 @@
-# FVAB_EmotionGate_Coimbra
+# Emotion Recognition from Video: An AI-Driven Approach
 <picture>
   <source srcset="./readmePhotos/EMOTION.GAIT.png" media="(min-width: 680px)">
     <p align="center">  
