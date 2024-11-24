@@ -1,8 +1,8 @@
 # FVAB_EmotionGate_Coimbra
 <picture>
-  <source srcset="./readmePhotos/EmotionGait.png" media="(min-width: 680px)">
+  <source srcset="./readmePhotos/EMOTION.GAIT.png" media="(min-width: 680px)">
     <p align="center">  
-        <img src="./readmePhotos/EmotionGait.png" alt="EmotionGateProject">
+        <img src="./readmePhotos/EMOTION.GAIT.png" alt="EmotionGateProject">
     </p>
 </picture>
 
@@ -20,12 +20,6 @@ This project presents an innovative approach for emotion recognition based on th
 In previous work, Recurrent Neural Networks (RNNs), particularly Long Short-Term Memory (LSTM) networks and Convolutional Neural Networks (CNNs), were employed to process sequential data and predict emotional trends. In this study, however, we modified the initial dataset to train Bayesian Neural Networks (BNNs). This shift allows us to incorporate probabilistic modeling, enabling more robust predictions by accounting for uncertainty in the model's outputs. 
 The findings contribute to a deeper understanding of the intersection between artificial intelligence and emotion recognition, offering new perspectives for future applications.
 
-<picture>
-  <source srcset="./readmePhotos/WorkFlow.png" media="(min-width: 600px)">
-  <p align="center">    
-    <img src="./readmePhotos/WorkFlow.png" alt="EmotionGateProject">
-  </p>
-</picture>
 
 ## Project Overview
 
@@ -57,9 +51,9 @@ The Bayesian Network approach focuses on simplicity and interpretability:
 This architecture avoids the complexities of temporal sequence modeling required by LSTM networks, making it computationally efficient and easier to interpret.
 
 <picture>
-  <source srcset="./readmePhotos/Bayesian_Network.png" media="(min-width: 480px)">
+  <source srcset="./readmePhotos/rete.png" media="(min-width: 480px)">
   <p align="center">    
-    <img src="./readmePhotos/Bayesian_Network.png" alt="Bayesian Network Architecture">
+    <img src="./readmePhotos/rete.png" alt="Bayesian Network Architecture">
   </p>
 </picture>
 
