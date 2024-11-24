@@ -33,13 +33,6 @@ Key steps involved in the updated project include:
 
 - **Classification**: A `Gaussian Naive Bayes (GNB)` classifier is employed to classify the extracted features into one of the target emotion categories. This probabilistic approach reduces computational costs compared to LSTMs while maintaining accuracy.
 
-<picture>
-  <source srcset="./readmePhotos/Emotions.png" media="(min-width: 600px)">
-  <p align="center">  
-    <img src="./readmePhotos/Emotions.png" alt="Emotions">
-  </p>
-</picture>
-
 ## Model Architecture
 
 ### Bayesian Network Architecture
