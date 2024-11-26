@@ -35,6 +35,15 @@ Key steps involved in the updated project include:
 
 - **Classification**: A `Gaussian Naive Bayes (GNB)` classifier is employed to classify the extracted features into one of the target emotion categories. This probabilistic approach reduces computational costs compared to LSTMs while maintaining accuracy.
 
+### Workflow
+<picture>
+  <source srcset="./readmePhotos/WORKFLOW.AI.png" media="(min-width: 680px)">
+    <p align="center">  
+        <img src="./readmePhotos/WORKFLOW.AI.png" alt="EmotionGateProject">
+    </p>
+</picture>
+
+
 ## Model Architecture
 
 ### Bayesian Network Architecture
