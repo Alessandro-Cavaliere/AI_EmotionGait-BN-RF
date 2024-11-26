@@ -11,9 +11,9 @@ Table of Contents
 
 * [Project Overview](#project-overview)
 * [Model Architecture](#model-architecture)
-* [Methods] (#methods)
-* [Results] (#results)
-* [Discussion] (#discussion)
+* [Methods](#methods)
+* [Results](#results)
+* [Discussion](#discussion)
 * [Future Work](#future-work)
 * [Setup and Usage](#setup-and-usage)
 
