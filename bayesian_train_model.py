@@ -86,6 +86,7 @@ import numpy as np
 from sklearn.preprocessing import LabelEncoder
 
 # Loads data for Bayesian network training, processing labels and features
+# Loads data for Bayesian network training, processing labels and features
 def load_data_for_bayesian_network(file_csv, external_labels_file):
     emotions = ['Happy', 'Sad', 'Angry', 'Neutral']
     video_data = {}
@@ -136,8 +137,7 @@ def load_data_for_bayesian_network(file_csv, external_labels_file):
 
     X = [X_temp[i:i+4] for i in range(0, len(X_temp), 4)]
 
-    # Indented Comments for the Feature Matrix X :)
-
+    # Feature Matrix X
     print("")
     print("########### Feature Matrix (X) ###########")
     print("Each sample in X contains normalized percentages for emotions: Happy, Sad, Angry, Neutral - For each video in the dataset.")
@@ -146,7 +146,6 @@ def load_data_for_bayesian_network(file_csv, external_labels_file):
     print(X)
     print("-----------------------------------------------------------------------------")
     print(f"Total number of samples in X: {len(X)}")
-
 
     X_final = X      
     if len(X_final) != 84:
@@ -164,7 +163,7 @@ def load_data_for_bayesian_network(file_csv, external_labels_file):
     else:
         print(f"File 'external_labels2.csv' not found. Ensure it is created correctly.")
         return None, None, emotions
-    
+
     df = pd.read_csv('./dativideo.csv')
     if 'Video Name' not in df.columns or 'Percentage' not in df.columns:
         print(f"The file ./dativideo.csv must contain 'Video Name' and 'Percentage' columns.")
@@ -206,11 +205,16 @@ def load_data_for_bayesian_network(file_csv, external_labels_file):
     y.append('Neutral')
     y = np.array(y)
 
-    le = LabelEncoder()
-    y = le.fit_transform(y)
+    # Custom Label Mapping
+    label_mapping = {
+        'Happy': 0,
+        'Sad': 1,
+        'Angry': 2,
+        'Neutral': 3
+    }
+    y = np.array([label_mapping[label] for label in y])
 
-    # Indented Comments for the Label Vector y :)
-
+    # Label Vector y
     print("")
     print("########### Label Vector (y) ###########")
     print("Each entry in y corresponds to the label assigned by a human to the respective video in the dataset to prevent the model from overgeneralizing.")
@@ -222,6 +226,7 @@ def load_data_for_bayesian_network(file_csv, external_labels_file):
     print(f"Total number of labels in y: {len(y)}")
 
     return X_final, y
+
 
 # Creates a second external labels file with averaged emotions
 def create_external_labels_2(file_csv, external_labels_file):
