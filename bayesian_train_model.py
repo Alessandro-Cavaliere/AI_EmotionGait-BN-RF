@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from datetime import datetime
 from sklearn.model_selection import train_test_split, cross_val_score, StratifiedKFold
-from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
@@ -79,11 +79,6 @@ def calculate_column_means(file_excel):
         for j, normalized_value in enumerate(normalized_means):
             results.append((f"{video_names[i + j]}-{emotions[i + j]}", round(normalized_value, 5)))
     return results
-
-import os
-import pandas as pd
-import numpy as np
-from sklearn.preprocessing import LabelEncoder
 
 # Loads data for Bayesian network training, processing labels and features
 # Loads data for Bayesian network training, processing labels and features
